@@ -1,0 +1,21 @@
+<div class="container my-4" style="max-width: 400px">
+    <h2>Redigera Bok</h2>
+    
+    <form (ngSubmit)="save()">
+    <div class="mb-3">
+        <label class="form-label">Titel:</label>
+        <input class="form-control" [(ngModel)]="book.title" name="title" required />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Författare:</label>
+        <input class="form-control" [(ngModel)]="book.author" name="author" required />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Publicerings datum:</label>
+        <input class="form-control" [(ngModel)]="book.publishDate" name="publish-date" required />
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Spara</button>
+    <button type="button" class="btn btn-secondary ms-2" (click)="cancel()">Avbryt</button>
+    </form>
+</div>

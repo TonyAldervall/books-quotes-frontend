@@ -1,0 +1,25 @@
+.quote-card {
+  background-color: #fff8f0;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  min-height: 150px;
+  position: relative;
+}
+
+.quote-icon {
+  font-size: 2rem;
+  color: #f39c12;
+  margin-bottom: 0.5rem;
+}
+
+.quote-text {
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.quote-author {
+  font-size: 0.9rem;
+  color: #666;
+}

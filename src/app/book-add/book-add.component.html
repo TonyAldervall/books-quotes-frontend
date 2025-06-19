@@ -1,0 +1,22 @@
+<div class="container my-4" style="max-width: 400px">
+  <h2>Lägg till ny bok</h2>
+  <form (ngSubmit)="submit()">
+    <div class="mb-3">
+      <label for="title" class="form-label">Titel:</label>
+      <input type="text" id="title" class="form-control" [(ngModel)]="book.title" name="title" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="author" class="form-label">Författare:</label>
+      <input type="text" id="author" class="form-control" [(ngModel)]="book.author" name="author" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="publishDate" class="form-label">Publiceringsdatum:</label>
+      <input type="text" id="publishDate" class="form-control" [(ngModel)]="book.publishDate" name="publishedDate" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Spara</button>
+    <button type="button" class="btn btn-secondary ms-2" (click)="cancel()">Avbryt</button>
+  </form>
+</div>

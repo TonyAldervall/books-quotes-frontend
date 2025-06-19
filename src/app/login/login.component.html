@@ -1,0 +1,32 @@
+<div class="container mt-5" style="max-width: 400px">
+  <h2>Log in</h2>
+  <form (ngSubmit)="login()">
+    <div class="mb-3">
+      <label for="username" class="form-label">Användarnamn</label>
+      <input
+        type="text"
+        class="form-control"
+        id="username"
+        [(ngModel)]="username"
+        name="username"
+        required
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="password" class="form-label">Lösenord</label>
+      <input
+        type="password"
+        class="form-control"
+        id="password"
+        [(ngModel)]="password"
+        name="password"
+        required
+      />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Logga in</button>
+
+  </form>
+  <p>Har du inget konto? <a routerLink="/register">Skapa ett här</a>.</p>
+</div>

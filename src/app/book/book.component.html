@@ -1,0 +1,19 @@
+<div class="container my-5">
+  <div class="d-flex align-items-center mb-3">
+    <h2>Böcker</h2>
+    <button class="btn btn-outline-primary ms-auto" [routerLink]="['/books/add']">Lägg till bok</button>
+  </div>
+
+  <ul class="list-group">
+    <li class="list-group-item d-flex align-items-center justify-content-between" *ngFor="let book of books">
+      <div>
+        <h5 class="mb-1">{{ book.title }}</h5>
+        <small class="text-muted">{{ book.author }} — {{ book.publishDate }}</small>
+      </div>
+      <div>
+        <button class="btn btn-outline-primary btn-sm me-2" (click)="editBook(book)"><i class="fa-solid fa-pen"></i></button>
+        <button class="btn btn-outline-danger btn-sm" (click)="deleteBook(book.id)"><i class="fa-solid fa-trash"></i></button>
+      </div>
+    </li>
+  </ul>
+</div>

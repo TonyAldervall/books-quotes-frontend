@@ -1,0 +1,22 @@
+<div class="container my-5">
+  <div class="container d-flex">
+    <h2>Citat</h2>
+    <button class="btn btn-outline-primary ms-auto" [routerLink]="['/quotes/add']">Lägg till citat</button>
+  </div>
+  
+  <div class="container my-4">
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+      <div class="col" *ngFor="let quote of quotes">
+        <div class="card quote-card p-3 position-relative">
+          <i class="fas fa-quote-left quote-icon"></i>
+          <p class="quote-text">{{ quote.text }}</p>
+          <p class="quote-author text-end fst-italic">— {{ quote.author }}</p>
+          <button class="btn btn-link favorite-btn position-absolute top-0 end-0"(click)="toggleFavorite(quote)">
+            <i [class]="quote.isFavorite ? 'fas fa-heart text-danger' : 'far fa-heart text-danger'"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>

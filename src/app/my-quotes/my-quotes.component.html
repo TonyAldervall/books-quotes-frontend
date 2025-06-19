@@ -1,0 +1,23 @@
+<div class="container my-5">
+    <div class="container">
+        <h2>Mina Citat</h2>
+    </div>
+
+    <div class="container my-4">
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            <div class="col" *ngFor="let quote of favorites">
+                <div class="card quote-card p-3 position-relative">
+                    <i class="fas fa-quote-left quote-icon"></i>
+                    <p class="quote-text">{{ quote.text }}</p>
+                    <p class="quote-author text-end fst-italic">— {{ quote.author }}</p>
+                    <button class="btn btn-link favorite-btn position-absolute top-0 end-0" (click)="removeFavorite(quote)">
+                        <i class="fas fa-heart text-danger"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="favorites.length === 0" class="text-center mt-5">
+        <p>Du har inga favoritcitat ännu.</p>
+        </div>
+    </div>
+</div>
