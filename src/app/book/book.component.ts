@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-book',
@@ -13,11 +14,10 @@ import { Router, RouterModule } from '@angular/router';
 export class BookComponent {
   books: any[] = [];
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router, private apiService: ApiService) {}
 
   ngOnInit() {
-    this.http.get<any[]>('https://localhost:7020/api/Books')
-      .subscribe({
+    this.apiService.getBooks().subscribe({
         next: (res) => this.books = res,
         error: (err) => console.error('Kunde inte hämta böcker:', err)
       });
@@ -28,7 +28,7 @@ export class BookComponent {
     return;
   }
 
-  this.http.delete(`https://localhost:7020/api/Books/${id}`).subscribe({
+  this.apiService.deleteBook(id).subscribe({
     next: () => {
       this.books = this.books.filter(book => book.id !== id);
     },

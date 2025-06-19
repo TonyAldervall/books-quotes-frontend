@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-add-quote',
@@ -16,10 +17,10 @@ export class QuoteAddComponent {
     author: ''
   };
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router, private apiService: ApiService) {}
 
   submit() {
-    this.http.post('https://localhost:7020/api/Quotes', this.quote).subscribe({
+    this.apiService.addQuote(this.quote).subscribe({
       next: () => this.router.navigate(['/quotes']),
       error: (err) => console.error('Kunde inte skapa citat:', err)
     });

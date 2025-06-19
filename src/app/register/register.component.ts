@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router, RouterModule } from '@angular/router';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-register',
@@ -17,7 +18,7 @@ export class RegisterComponent {
   confirmPassword = '';
   errorMessage = '';
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router, private apiService: ApiService) {}
 
   register() {
     if (this.password !== this.confirmPassword) {
@@ -29,7 +30,7 @@ export class RegisterComponent {
 
     const user = { username: this.username, password: this.password };
 
-    this.http.post('https://localhost:7020/api/Users', user).subscribe({
+    this.apiService.addUser(user).subscribe({
       next: () => {
         alert('Konto skapat! Du kan nu logga in.');
         this.router.navigate(['/login']);
@@ -38,10 +39,8 @@ export class RegisterComponent {
         console.error('Kunde inte registrera:', err);
 
         if (err.status === 400 && err.error?.message) {
-          // Visa specifikt backend-meddelande
           this.errorMessage = err.error.message;
         } else {
-          // Generisk felhantering
           this.errorMessage = 'Något gick fel. Prova igen.';
         }
       }

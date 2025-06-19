@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-my-quotes',
@@ -12,7 +13,7 @@ export class MyQuotesComponent {
   favorites: any[] = [];
   userId: string | null = null;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private apiService: ApiService) {}
 
   ngOnInit() {
     this.userId = localStorage.getItem('userId');
@@ -22,10 +23,9 @@ export class MyQuotesComponent {
   loadFavorites() {
     if (!this.userId) return;
 
-    this.http.get<any[]>(`https://localhost:7020/api/QuoteFavorites/favorites/${this.userId}`)
-      .subscribe({
+    this.apiService.getFavorites(this.userId).subscribe({
         next: (res) => {
-          // Anta att API returnerar en lista med quotes direkt
+          
           this.favorites = res;
         },
         error: (err) => console.error('Kunde inte hämta favoritcitat:', err)
@@ -35,8 +35,7 @@ export class MyQuotesComponent {
   removeFavorite(quote: any) {
     if (!this.userId) return;
 
-    this.http.delete(`https://localhost:7020/api/QuoteFavorites/${this.userId}/${quote.id}`)
-      .subscribe({
+    this.apiService.deleteFavorite(this.userId, quote.id).subscribe({
         next: () => {
           // Ta bort citatet från listan i frontend direkt
           this.favorites = this.favorites.filter(fav => fav.id !== quote.id);

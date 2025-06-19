@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-quotes',
@@ -11,16 +12,16 @@ import { Router, RouterModule } from '@angular/router';
 })
 export class QuotesComponent {
   quotes: any[] = [];
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router, private apiService: ApiService) {}
 
   ngOnInit() {
     const userId = localStorage.getItem('userId')!;
 
-    this.http.get<any[]>('https://localhost:7020/api/Quotes').subscribe({
+    this.apiService.getQuotes().subscribe({
       next: (quotes) => {
         this.quotes = quotes;
 
-        this.http.get<any[]>(`https://localhost:7020/api/QuoteFavorites/favorites/${userId}`).subscribe({
+        this.apiService.getFavorites(userId).subscribe({
           next: (favoriteQuotes) => {
             const favoriteQuoteIds = favoriteQuotes.map(fq => fq.id);
             
@@ -43,16 +44,14 @@ export class QuotesComponent {
 
     const favorite = { userId, quoteId };
 
-    console.log(favorite);
-
     if(!quote.isFavorite){
-      this.http.post('https://localhost:7020/api/QuoteFavorites', favorite).subscribe({
+      this.apiService.addFavorite(favorite).subscribe({
         next: () => quote.isFavorite = true,
         error: (err) => console.error('Kunde inte favoritmarkera citat:', err)
       });
     }
     else if(quote.isFavorite){
-      this.http.delete(`https://localhost:7020/api/QuoteFavorites/${userId}/${quoteId}`).subscribe({
+      this.apiService.deleteFavorite(userId, quote.id).subscribe({
         next: () => {
           quote.isFavorite = false;
         },

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-book-edit',
@@ -14,28 +15,18 @@ export class BookEditComponent implements OnInit {
   bookId!: string;
   book: any = {};
 
-  constructor(
-    private route: ActivatedRoute,
-    private http: HttpClient,
-    private router: Router
-  ) {}
+  constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router, private apiService: ApiService) {}
 
   ngOnInit() {
     this.bookId = this.route.snapshot.paramMap.get('id')!;
-    this.loadBook();
-  }
-
-  loadBook() {
-    this.http.get(`https://localhost:7020/api/Books/${this.bookId}`)
-      .subscribe({
+    this.apiService.getBookById(this.bookId).subscribe({
         next: (res) => this.book = res,
         error: (err) => console.error('Could not load book', err)
       });
   }
 
   save() {
-    this.http.put(`https://localhost:7020/api/Books/${this.bookId}`, this.book)
-      .subscribe({
+    this.apiService.updateBook(this.book, this.bookId).subscribe({
         next: () => this.router.navigate(['/books']),
         error: (err) => console.error('Could not save book', err)
       });
