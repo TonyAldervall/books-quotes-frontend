@@ -16,7 +16,7 @@ export class ApiService {
   }
 
   getBookById(id: any){
-    return this.http.get(`https://localhost:7020/api/Books/${id}`);
+    return this.http.get(`${this.apiUrl}/api/Books/${id}`);
   }
 
   addBook(book: any) {
@@ -24,11 +24,11 @@ export class ApiService {
   }
   
   updateBook(book: any, bookId: any){
-    return this.http.put(`https://localhost:7020/api/Books/${bookId}`, book);
+    return this.http.put(`${this.apiUrl}/api/Books/${bookId}`, book);
   }
 
   deleteBook(id: any){
-    return this.http.delete(`https://localhost:7020/api/Books/${id}`);
+    return this.http.delete(`${this.apiUrl}/api/Books/${id}`);
   }
 
   addUser(user: any){
@@ -36,25 +36,25 @@ export class ApiService {
   }
 
   login(body: any){
-    return this.http.post<any>('https://localhost:7020/api/Auth/Login', body);
+    return this.http.post<any>(`${this.apiUrl}/api/Auth/Login`, body);
   }
 
   getFavorites(userId: any){
-    return this.http.get<any[]>(`https://localhost:7020/api/QuoteFavorites/favorites/${userId}`);
+    return this.http.get<any[]>(`${this.apiUrl}/api/QuoteFavorites/favorites/${userId}`);
   }
 
   addFavorite(favorite: any){
-    return this.http.post('https://localhost:7020/api/QuoteFavorites', favorite);
+    return this.http.post(`${this.apiUrl}/api/QuoteFavorites`, favorite);
   }
 
   deleteFavorite(userId: any, quoteId: any){
-    return this.http.delete(`https://localhost:7020/api/QuoteFavorites/${userId}/${quoteId}`);
+    return this.http.delete(`${this.apiUrl}/api/QuoteFavorites/${userId}/${quoteId}`);
   }
   
   getQuotes(){
-    return this.http.get<any[]>('https://localhost:7020/api/Quotes');
+    return this.http.get<any[]>(`${this.apiUrl}/api/Quotes`);
   }
   addQuote(quote: any){
-    return this.http.post('https://localhost:7020/api/Quotes', quote);
+    return this.http.post(`${this.apiUrl}/api/Quotes`, quote);
   }
 }
