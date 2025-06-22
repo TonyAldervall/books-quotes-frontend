@@ -21,14 +21,14 @@ export class BookEditComponent implements OnInit {
     this.bookId = this.route.snapshot.paramMap.get('id')!;
     this.apiService.getBookById(this.bookId).subscribe({
         next: (res) => this.book = res,
-        error: (err) => console.error('Could not load book', err)
+        error: (err) => console.error('Kunde inte hämta bok', err)
       });
   }
 
   save() {
     this.apiService.updateBook(this.book, this.bookId).subscribe({
         next: () => this.router.navigate(['/books']),
-        error: (err) => console.error('Could not save book', err)
+        error: (err) => console.error('Kunde inte spara bok', err)
       });
   }
 

@@ -57,9 +57,24 @@ export class QuotesComponent {
         },
         error: (err) => console.error('Kunde inte ta bort favorit', err)
       });
-        
+    }
+  }
+  deleteQuote(id: number) {
+    if (!confirm('Är du säker på att du vill ta bort citatet?')) {
+      return;
     }
 
+    this.apiService.deleteQuote(id).subscribe({
+      next: () => {
+        this.quotes = this.quotes.filter(quote => quote.id !== id);
+      },
+      error: (err) => {
+        console.error('Kunde inte ta bort citatet', err);
+      }
+    });
+  }
+  editQuote(quote: any) {
+    this.router.navigate(['/quotes/edit', quote.id]);
   }
 
 }

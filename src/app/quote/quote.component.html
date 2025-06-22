@@ -10,10 +10,12 @@
         <div class="card quote-card p-3 position-relative">
           <i class="fas fa-quote-left quote-icon"></i>
           <p class="quote-text">{{ quote.text }}</p>
-          <p class="quote-author text-end fst-italic">— {{ quote.author }}</p>
-          <button class="btn btn-link favorite-btn position-absolute top-0 end-0"(click)="toggleFavorite(quote)">
-            <i [class]="quote.isFavorite ? 'fas fa-heart text-danger' : 'far fa-heart text-danger'"></i>
-          </button>
+          <button class="btn btn-link favorite-btn position-absolute top-0 end-0"(click)="toggleFavorite(quote)"><i [class]="quote.isFavorite ? 'fas fa-heart text-danger' : 'far fa-heart text-danger'"></i></button>
+          <div>
+            <p class="quote-author text-end fst-italic">— {{ quote.author }}</p>
+            <button class="btn btn-outline-primary btn-sm me-2" (click)="editQuote(quote)"><i class="fa-solid fa-pen"></i></button>
+            <button class="btn btn-outline-danger btn-sm" (click)="deleteQuote(quote.id)"><i class="fa-solid fa-trash"></i></button>
+          </div>
         </div>
       </div>
     </div>

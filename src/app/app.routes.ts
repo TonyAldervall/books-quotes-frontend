@@ -8,6 +8,7 @@ import { QuotesComponent } from './quote/quote.component';
 import { RegisterComponent } from './register/register.component';
 import { QuoteAddComponent } from './quote-add/quote-add.component';
 import { MyQuotesComponent } from './my-quotes/my-quotes.component';
+import { QuoteEditComponent } from './quote-edit/quote-edit.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -18,5 +19,6 @@ export const routes: Routes = [
     { path: 'books/add', component: BookAddComponent, canActivate: [loggedIn]},
     { path: 'quotes', component: QuotesComponent, canActivate: [loggedIn]},
     { path: 'quotes/add', component: QuoteAddComponent, canActivate: [loggedIn]},
+    { path: 'quotes/edit/:id', component: QuoteEditComponent, canActivate: [loggedIn]},
     { path: 'my-quotes', component: MyQuotesComponent, canActivate: [loggedIn]}
 ];

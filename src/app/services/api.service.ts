@@ -54,7 +54,16 @@ export class ApiService {
   getQuotes(){
     return this.http.get<any[]>(`${this.apiUrl}/api/Quotes`);
   }
+  getQuoteById(id: any){
+    return this.http.get(`${this.apiUrl}/api/Quotes/${id}`);
+  }
   addQuote(quote: any){
     return this.http.post(`${this.apiUrl}/api/Quotes`, quote);
+  }
+  updateQuote(quote: any, quoteId: any){
+    return this.http.put(`${this.apiUrl}/api/Quotes/${quoteId}`, quote); 
+  }
+  deleteQuote(id: any){
+    return this.http.delete(`${this.apiUrl}/api/Quotes/${id}`);
   }
 }
